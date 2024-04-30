@@ -1,0 +1,119 @@
+body {
+    background: linear-gradient(270deg, #0072ff, #00c6ff);
+    background-size: 200% 200%;
+    animation: Gradient 3s ease infinite;
+}
+
+@keyframes Gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black;
+}
+
+.container p, .container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+    font-weight: 900;
+}
+
+.section {
+    margin-bottom: 2em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+}
+
+@media (max-width: 576px) {
+    .column {
+        margin-bottom: 20px;
+    }
+}
+
+.trophy-inputs {
+    margin-bottom: 20px;
+}
+
+.trophy-inputs > div {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    .trophy-inputs {
+        flex-direction: column;
+    }
+}
+
+.trophy-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: #003791;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+input[type="number"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px #003791;
+}
+
+.level-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.level-info > img {
+    align-self: center;
+}
+
+.trophy_level {
+    width: 40px;
+    height: 40px;
+}
+
+.next-level {
+    width: 25px;
+}
+
+.current-level-info {
+    width: 100%;
+}
+
+.current-level-info > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.current-level-info > div > p {
+    margin-bottom: 0;
+}
+
+#current-points, #progress-percentage {
+    align-self: flex-end;
+}

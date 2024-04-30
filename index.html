@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStation Trophy Level Calculator</title>
+    <link rel="icon" href="img/trophy/current/platinum.png" type="image/png">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>PlayStation Trophy Level Calculator</h2>
+            <p>Enter the number of trophies you have earned to calculate your level</p>
+            <div class="row trophy-inputs">
+                <div class="column">
+                    <img src="img/trophy/previous/bronze.webp" alt="Bronze" class="trophy-image">
+                    <input type="number" id="current-bronze" min="0">
+                </div>
+                <div class="column">
+                    <img src="img/trophy/previous/silver.webp" alt="Silver" class="trophy-image">
+                    <input type="number" id="current-silver" min="0">
+                </div>
+                <div class="column">
+                    <img src="img/trophy/previous/gold.webp" alt="Gold" class="trophy-image">
+                    <input type="number" id="current-gold" min="0">
+                </div>
+                <div class="column">
+                    <img src="img/trophy/previous/platinum.webp" alt="Platinum" class="trophy-image">
+                    <input type="number" id="current-platinum" min="0">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <h3>Previous system level</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="level-info">
+                                <img src="img/level/previous/trophy_level.webp" alt="Star Icon" class="trophy_level">
+                                <div class="current-level-info">
+                                    <div>
+                                        <p id="previous-system-current-level">1</p>
+                                        <p id="previous-system-current-points">0 points</p>
+                                        <p id="previous-system-progress-percentage">0%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div id="previous-system-current-progress" class="progress-bar" role="progressbar"
+                                            style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div>
+                                        <p id="previous-system-current-level-requirement">50 points</p>
+                                        <p id="previous-system-points-until-next">50 left</p>
+                                        <p id="previous-system-next-level-requirement">100 points</p>
+                                    </div>
+                                </div>
+                                <img src="img/level/previous/trophy_level.webp" alt="Star Icon" class="trophy_level">
+                                <p id="previous-system-next-level" class="next-level">2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3>Current system level</h3>
+                    <div class="row">
+                        <div class="col">
+                            <div class="level-info">
+                                <img id="current-system-current-level-image" src="img/level/current/bronze_level_1.webp" alt="Star Icon" class="trophy_level">
+                                <div class="current-level-info">
+                                    <div>
+                                        <p id="current-system-current-level">1</p>
+                                        <p id="current-system-current-points">0 points</p>
+                                        <p id="current-system-progress-percentage">0%</p>
+                                    </div>
+                                    <div class="progress">
+                                        <div id="current-system-current-progress" class="progress-bar" role="progressbar"
+                                            style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                    <div>
+                                        <p id="current-system-current-level-requirement">50 points</p>
+                                        <p id="current-system-points-until-next">50 left</p>
+                                        <p id="current-system-next-level-requirement">100 points</p>
+                                    </div>
+                                </div>
+                                <img id="current-system-next-level-image" src="img/level/current/bronze_level_1.webp" alt="Star Icon" class="trophy_level">
+                                <p id="current-system-next-level" class="next-level">2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
