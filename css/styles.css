@@ -31,10 +31,6 @@ body {
     justify-content: space-between;
 }
 
-.trophy-inputs {
-    margin-bottom: 20px;
-}
-
 .trophy-inputs > div {
     display: flex;
     align-items: center;

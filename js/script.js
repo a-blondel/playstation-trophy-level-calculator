@@ -3,6 +3,18 @@ const trophyPoints = {
     current: { bronze: 15, silver: 30, gold: 90, platinum: 300 }
 };
 
+const levels = [
+    { name: 'Bronze 2', target: 100 },
+    { name: 'Bronze 3', target: 200 },
+    { name: 'Silver 1', target: 300 },
+    { name: 'Silver 2', target: 400 },
+    { name: 'Silver 3', target: 500 },
+    { name: 'Gold 1', target: 600 },
+    { name: 'Gold 2', target: 700 },
+    { name: 'Gold 3', target: 800 },
+    { name: 'Platinum', target: 999 },
+];
+
 function calculatePoints(system, bronze, silver, gold, platinum) {
     return bronze * trophyPoints[system].bronze +
            silver * trophyPoints[system].silver +
@@ -63,7 +75,7 @@ function calculateLevel(system, points) {
     return level;
 }
 
-function updateLevelImage(id, level) {
+function getLevelImage(level) {
     let imagePath = 'img/level/current/bronze_level_1.webp';
     if (level <= 99) imagePath = 'img/level/current/bronze_level_1.webp';
     else if (level <= 199) imagePath = 'img/level/current/bronze_level_2.webp';
@@ -74,8 +86,35 @@ function updateLevelImage(id, level) {
     else if (level <= 699) imagePath = 'img/level/current/gold_level_1.webp';
     else if (level <= 799) imagePath = 'img/level/current/gold_level_2.webp';
     else if (level <= 998) imagePath = 'img/level/current/gold_level_3.webp';
-    else if (level == 999) imagePath = 'img/level/current/platinum_level.webp';
-    document.getElementById(id).src = imagePath;
+    else if (level == 999) imagePath = 'img/level/current/platinum_level.webp'
+    return imagePath;
+}
+
+function defineNextSteps(currentPoints, currentLevel) {
+    const template = document.getElementById('progress-bar-template');
+    const container = document.querySelector('.next-steps');
+    container.innerHTML = '';
+    for (let i = 0; i < levels.length; i++) {
+        const nextLevel = levels[i].target;
+        if(nextLevel > currentLevel) {
+            const clone = template.content.cloneNode(true);
+            const nextLevelRequiredPoints = getPointsForLevel('current', nextLevel);
+            const progressPercentage = Math.floor((currentPoints) / (nextLevelRequiredPoints) * 100);
+            var progressBar = clone.getElementById('current-system-current-progress');
+            clone.getElementById('current-system-current-level-image').src = getLevelImage(currentLevel);
+            clone.getElementById('current-system-current-level').textContent = currentLevel;
+            clone.getElementById('current-system-current-points').textContent = currentPoints;
+            clone.getElementById('current-system-progress-percentage').textContent = progressPercentage + '%';
+            progressBar.style.width = progressPercentage + '%' ;
+            progressBar.setAttribute('aria-valuenow', progressPercentage);
+            clone.getElementById('current-system-points-until-next').textContent = nextLevelRequiredPoints - currentPoints + ' left';
+            clone.getElementById('current-system-next-level-requirement').textContent = nextLevelRequiredPoints;
+            clone.getElementById('current-system-next-level-image').src = getLevelImage(nextLevel);
+            clone.getElementById('current-system-next-level').textContent = nextLevel;
+        
+            container.appendChild(clone);
+        }
+    }
 }
 
 function updateData() {
@@ -90,7 +129,7 @@ function updateData() {
         const currentLevelRequiredPoints = getPointsForLevel(system, currentLevel);
         const nextLevel = currentLevel + 1;
         const nextLevelRequiredPoints = getPointsForLevel(system, nextLevel);
-        const progressPercentage = Math.round((currentPoints - currentLevelRequiredPoints) / (nextLevelRequiredPoints - currentLevelRequiredPoints) * 100);
+        const progressPercentage = Math.floor((currentPoints - currentLevelRequiredPoints) / (nextLevelRequiredPoints - currentLevelRequiredPoints) * 100);
 
         var progressBar = document.getElementById(system + '-system-current-progress');
         document.getElementById(system + '-system-current-points').textContent = currentPoints;
@@ -107,14 +146,21 @@ function updateData() {
         } else if (system === 'current') {
             document.getElementById(system + '-system-current-level').textContent = currentLevel <= 999 ? currentLevel : 999;
             document.getElementById(system + '-system-next-level').textContent = nextLevel <= 999 ? nextLevel : 999;
-            updateLevelImage('current-system-current-level-image', currentLevel <= 999 ? currentLevel : 999);
-            updateLevelImage('current-system-next-level-image', nextLevel <= 999 ? nextLevel : 999);
+            const currentLevelimagePath = getLevelImage(currentLevel <= 999 ? currentLevel : 999);
+            const nextLevelImagePath = getLevelImage(nextLevel <= 999 ? nextLevel : 999);
+            document.getElementById('current-system-current-level-image').src = currentLevelimagePath;
+            document.getElementById('current-system-next-level-image').src = nextLevelImagePath;
+            
             document.getElementById(system + '-system-current-level-requirement').textContent = currentLevel <= 999 ? currentLevelRequiredPoints : 0;
             document.getElementById(system + '-system-next-level-requirement').textContent = nextLevel <= 999 ? nextLevelRequiredPoints : 0;
             document.getElementById(system + '-system-points-until-next').textContent = nextLevel <= 999 ? nextLevelRequiredPoints - currentPoints + ' left' : '0 left';
             document.getElementById(system + '-system-progress-percentage').textContent = nextLevel <= 999 ? progressPercentage + '%' : '100%';
             progressBar.style.width = nextLevel <= 999 ? progressPercentage + '%' : '100%';
             progressBar.setAttribute('aria-valuenow', nextLevel <= 999 ? progressPercentage : 100);
+        }
+
+        if(system === 'current') {
+            defineNextSteps(currentPoints, currentLevel);
         }
         
     });
