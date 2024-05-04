@@ -31,16 +31,6 @@ body {
     justify-content: space-between;
 }
 
-.column {
-    flex: 1;
-}
-
-@media (max-width: 576px) {
-    .column {
-        margin-bottom: 20px;
-    }
-}
-
 .trophy-inputs {
     margin-bottom: 20px;
 }
@@ -116,4 +106,15 @@ input[type="number"]:focus {
 
 #current-points, #progress-percentage {
     align-self: flex-end;
+}
+
+.system-level-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 576px) {
+    .system-level-row {
+        flex-direction: column;
+    }
 }
